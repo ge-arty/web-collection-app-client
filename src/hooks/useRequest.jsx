@@ -1,21 +1,31 @@
 import { useState } from "react";
+import { useGlobalContext } from "../contexts/GlobalContext";
 
 const useRequest = (url, method) => {
+  const { setAdmin, setToken, setUserId } = useGlobalContext();
   const [loading, setLoading] = useState(false);
-  const sendRequest = async (body, custom) => {
+  const [message, setMessage] = useState("");
+  const sendRequest = async (body, token, custom) => {
     setLoading(true);
     const res = await fetch(url || custom, {
       method,
       headers: {
         "Content-type": "application/json",
-        Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
+        ...(token && { Authorization: `Bearer ${token}` }),
       },
       body: !!body && method !== "GET" ? JSON.stringify(body) : undefined,
     });
     const data = await res.json();
+
+    if (method === "POST" && data.token) {
+      setAdmin(data.admin);
+      setToken(data.token);
+      setUserId(data._id);
+    }
+    if (data.message) setMessage(data.message);
     setLoading(false);
     return data;
   };
-  return { loading, sendRequest };
+  return { loading, setMessage, message, sendRequest };
 };
 export default useRequest;

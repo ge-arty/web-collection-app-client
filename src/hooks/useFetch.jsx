@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 
-const useFetch = (url, method) => {
+const useFetch = (url, method, token) => {
   const [response, setResponse] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -11,7 +11,7 @@ const useFetch = (url, method) => {
       method,
       headers: {
         "Content-type": "application/json",
-        Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
+        Authorization: `Bearer ${token}`,
       },
     })
       .then((res) => {

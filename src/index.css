@@ -12,3 +12,6 @@ button {
   border: none;
   outline: none;
 }
+td {
+  text-align: center;
+}

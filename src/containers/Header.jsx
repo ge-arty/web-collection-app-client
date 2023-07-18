@@ -1,3 +1,4 @@
+import { useGlobalContext } from "../contexts/GlobalContext";
 import {
   HeaderWrapper,
   Logo,
@@ -7,6 +8,12 @@ import {
 } from "../styles/styles";
 
 const Header = () => {
+  const { userId, admin, setAdmin, setUserId, setToken } = useGlobalContext();
+  const signOut = () => {
+    setAdmin(false);
+    setUserId(null);
+    setToken(null);
+  };
   return (
     <HeaderWrapper>
       <Logo>MyCollections</Logo>
@@ -16,11 +23,17 @@ const Header = () => {
       <NavWrapper>
         <NavItem to={"/"}>Explore</NavItem>
         <NavItem to={"/dashboard"}>Dashboard</NavItem>
-        <NavItem to={"/register"}>Register</NavItem>
+        {!userId && <NavItem to={"/register"}>Register</NavItem>}
+        {admin === "true" && <NavItem to={"/admin-panel"}>Admin Panel</NavItem>}
       </NavWrapper>
 
-      <NavItem to={"/login"}>Login</NavItem>
+      {!userId ? (
+        <NavItem to={"/login"}>Login</NavItem>
+      ) : (
+        <NavItem onClick={signOut}>Signout</NavItem>
+      )}
     </HeaderWrapper>
   );
 };
+
 export default Header;

@@ -1,22 +1,35 @@
-import { FormDiv, FormInput, FormWrapper, SubmitBtn } from "../styles/styles";
+import { useRef } from "react";
+import {
+  FormDiv,
+  FormInput,
+  FormText,
+  FormWrapper,
+  SubmitBtn,
+} from "../styles/styles";
 
-const LoginForm = () => {
+const LoginForm = ({ onFormSubmit, message }) => {
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const onSubmit = (e) => {
+    e.preventDefault();
+    onFormSubmit(emailRef.current.value, passwordRef.current.value);
+  };
   return (
-    <FormWrapper>
+    <FormWrapper onSubmit={onSubmit}>
       <FormDiv>
         <label htmlFor="useremail">
           Email:
-          <FormInput type="email" id="email" />
+          <FormInput ref={emailRef} type="email" id="email" />
         </label>
       </FormDiv>
       <FormDiv>
         <label htmlFor="userpassword">
           Password:
-          <FormInput type="password" id="userpassword" />
+          <FormInput ref={passwordRef} type="password" id="userpassword" />
         </label>
       </FormDiv>
 
-      <p>Text</p>
+      <FormText>{message}</FormText>
       <SubmitBtn>Submit</SubmitBtn>
     </FormWrapper>
   );
