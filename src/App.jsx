@@ -8,6 +8,9 @@ import Footer from "./containers/Footer";
 import CreatePage from "./pages/CreatePage";
 import { AppWrapper } from "./styles/styles";
 import { GlobalContextProvider } from "./contexts/GlobalContext.jsx";
+import CollectionPage from "./pages/CollectionPage";
+import CreateItemPage from "./pages/CreateItemPage";
+import ItemUpdatePage from "./pages/ItemUpdatePage";
 
 function App() {
   return (
@@ -20,6 +23,15 @@ function App() {
           <Route path={"/login"} element={<Login />} />
           <Route path={"/register"} element={<Register />} />
           <Route path={"/create-collection"} element={<CreatePage />} />
+          <Route
+            path={"/collection/:id/create-item"}
+            element={<CreateItemPage />}
+          />
+          <Route path={"/collection/:id"} element={<CollectionPage />} />
+          <Route
+            path={"/item-update/:collectionId/:id"}
+            element={<ItemUpdatePage />}
+          />
         </Routes>
         <Footer />
       </GlobalContextProvider>

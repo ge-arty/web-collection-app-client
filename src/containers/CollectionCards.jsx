@@ -12,20 +12,21 @@ import {
   CollectionCardButtons,
   CollectionCardButton,
   CollectionContainer,
+  StyledLink,
 } from "../styles/styles";
 
 const CollectionCards = ({ response, onDelete }) => {
-  const [selectValue, setSelectValue] = useState("");
+  const [selectValueFilter, setSelectValueFilter] = useState("");
   const collections = response?.collections.filter((collection) => {
-    if (selectValue === "") return true;
-    else return collection.category === selectValue;
+    if (selectValueFilter === "") return true;
+    else return collection.category === selectValueFilter;
   });
 
   return (
     <CollectionCardWrapper>
       <select
-        value={selectValue}
-        onChange={(e) => setSelectValue(e.target.value)}
+        value={selectValueFilter}
+        onChange={(e) => setSelectValueFilter(e.target.value)}
       >
         <option value="">Filter Your Collections</option>
         <option value="Books">Books</option>
@@ -59,7 +60,9 @@ const CollectionCards = ({ response, onDelete }) => {
                     <CollectionCardButton onClick={() => onDelete(item._id)}>
                       Remove
                     </CollectionCardButton>
-                    <CollectionCardButton>See Items</CollectionCardButton>
+                    <StyledLink to={`/collection/${item._id}`}>
+                      See Items
+                    </StyledLink>
                   </CollectionCardButtons>
                 </CollectionCardBody>
               </CollectionCardElem>

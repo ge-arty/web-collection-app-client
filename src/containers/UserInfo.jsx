@@ -22,7 +22,7 @@ const UserInfo = () => {
     sendRequest(
       body,
       token,
-      `https://collectionwebserver.onrender.com/collection/${collectionId}`
+      `https://collectionwebserver.onrender.com/deleteCollection/${collectionId}`
     ).then(() => resendRequest());
   };
 

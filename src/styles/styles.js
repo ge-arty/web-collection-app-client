@@ -122,6 +122,15 @@ export const FormDiv = styled.div`
   align-items: center;
   padding: 0.5rem;
 `;
+export const FieldsWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 1rem;
+  flex-direction: column;
+  gap: 20px;
+`;
 
 export const FormInput = styled.input`
   padding: 0.2rem;
@@ -161,6 +170,44 @@ export const StyledLink = styled(Link)`
   font-weight: bold;
   border-radius: 5px;
   cursor: pointer;
+`;
+export const FieldAddBtn = styled.button`
+  margin-bottom: 20px;
+  background: #4f9c0b;
+  padding: 0.5rem;
+  border-radius: 20px;
+`;
+
+export const DeleteBtn = styled.button`
+  background-color: #e4371f;
+  color: #fff;
+  cursor: pointer;
+  padding: 0.5rem;
+`;
+// Collection Page
+export const CollectionWrapper = styled.div`
+  width: 100%;
+  padding: 1rem;
+`;
+
+export const TableWrapper = styled.div`
+  overflow-x: auto;
+  margin-top: 20px;
+`;
+
+export const TableItems = styled.table`
+  width: 100%;
+  border-collapse: collapse;
+`;
+
+export const Th = styled.th`
+  background-color: #f2f2f2;
+  padding: 12px;
+`;
+
+export const Td = styled.td`
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
 `;
 //--------------------------------- Collection  Card
 

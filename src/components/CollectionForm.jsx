@@ -54,14 +54,8 @@ const CollectionForm = ({ onFormSubmit }) => {
         </label>
       </FormDiv>
       <FormDiv>
-        <label htmlFor="collectiondescription">
-          Description
-          <FormInput
-            ref={descriptionRef}
-            type="text"
-            id="collectiondescription"
-          />
-        </label>
+        <label htmlFor="collectiondescription">Description </label>
+        <textarea ref={descriptionRef} type="text" id="collectiondescription" />
       </FormDiv>
       <FormDiv>
         <label htmlFor="imageInput">
