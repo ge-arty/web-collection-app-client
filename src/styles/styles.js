@@ -276,3 +276,43 @@ export const CollectionCardButton = styled.button`
   cursor: pointer;
   margin-right: 5px;
 `;
+// --------- Explore styles
+export const ExploreWrapper = styled.div`
+  width: 100%;
+`;
+export const ExploreContainer = styled.div`
+  width: 100%;
+  padding: 1rem;
+`;
+
+export const ExploreTitle = styled.h2``;
+export const ExploreFlexContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+`;
+
+export const ExplorePictureContainer = styled.div`
+  width: 100%;
+  position: relative;
+`;
+export const ExploreImg = styled.img`
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+
+  opacity: 0.7;
+`;
+export const ExplorePictureTitleBox = styled.div`
+  position: absolute;
+  top: 40%;
+  left: 17%;
+  width: 100%;
+  max-width: 200px;
+
+  color: rgba(113, 32, 153, 0.7);
+  font-size: clamp(1rem, 0.6479rem + 1.1268vw, 2rem);
+  font-weight: bold;
+`;

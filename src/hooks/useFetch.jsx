@@ -11,7 +11,7 @@ const useFetch = (url, method, token) => {
       method,
       headers: {
         "Content-type": "application/json",
-        Authorization: `Bearer ${token}`,
+        ...(token && { Authorization: `Bearer ${token}` }),
       },
     })
       .then((res) => {

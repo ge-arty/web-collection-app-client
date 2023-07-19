@@ -11,9 +11,10 @@ const Header = () => {
   const { userId, admin, setAdmin, setUserId, setToken } = useGlobalContext();
   const signOut = () => {
     setAdmin(false);
-    setUserId(null);
+    setUserId("");
     setToken(null);
   };
+
   return (
     <HeaderWrapper>
       <Logo>MyCollections</Logo>
@@ -23,11 +24,13 @@ const Header = () => {
       <NavWrapper>
         <NavItem to={"/"}>Explore</NavItem>
         <NavItem to={"/dashboard"}>Dashboard</NavItem>
-        {!userId && <NavItem to={"/register"}>Register</NavItem>}
-        {admin === "true" && <NavItem to={"/admin-panel"}>Admin Panel</NavItem>}
+        {userId === "" && <NavItem to={"/register"}>Register</NavItem>}
+        {admin !== false && admin !== "false" && (
+          <NavItem to={"/admin-panel"}>Admin Panel</NavItem>
+        )}
       </NavWrapper>
 
-      {!userId ? (
+      {userId === "" ? (
         <NavItem to={"/login"}>Login</NavItem>
       ) : (
         <NavItem onClick={signOut}>Signout</NavItem>

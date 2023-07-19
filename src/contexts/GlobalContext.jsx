@@ -3,8 +3,8 @@ import useLocalStorage from "../hooks/useLocalStorage";
 import useCookieStorage from "../hooks/useCookiesStorage";
 
 const GlobalContext = React.createContext({
-  admin: false,
-  userId: null,
+  admin: "false",
+  userId: "",
   token: null,
 });
 
@@ -13,8 +13,8 @@ const useGlobalContext = () => {
 };
 
 const GlobalContextProvider = ({ children }) => {
-  const [admin, setAdmin] = useLocalStorage("admin", false);
-  const [userId, setUserId] = useLocalStorage("userId", null);
+  const [admin, setAdmin] = useLocalStorage("admin", "false");
+  const [userId, setUserId] = useLocalStorage("userId", "");
   const [token, setToken] = useCookieStorage("token", null);
 
   return (

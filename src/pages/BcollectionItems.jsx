@@ -1,66 +1,45 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
+import useFetch from "../hooks/useFetch";
 import {
   CollectionWrapper,
-  DeleteBtn,
-  StyledLink,
-  SubmitBtn,
   TableItems,
   TableWrapper,
   Td,
   Th,
 } from "../styles/styles";
-import useFetch from "../hooks/useFetch";
-import { useGlobalContext } from "../contexts/GlobalContext";
-import useRequest from "../hooks/useRequest";
 
-const CollectionPage = () => {
-  const [sortOption, setSortOption] = useState("");
-  // Collection Id
+const BcollectionItems = () => {
   const { id } = useParams();
-
-  const { userId, token } = useGlobalContext();
-
   const { response, error, loading, resendRequest } = useFetch(
-    `https://collectionwebserver.onrender.com/user/${userId}`,
+    `https://collectionwebserver.onrender.com/collections`,
     "GET",
-    token
+    null
   );
-  const collection = response?.collections.find(
+  const collection = response?.allCollections.find(
     (collection) => collection._id === id
   );
-  const sortCollection = (option) => {
-    if (option === "new") {
-      return collection?.item.sort(
-        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-      );
-    } else if (option === "old") {
-      return collection?.item.sort(
-        (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
-      );
-    } else {
-      return collection?.item;
-    }
-  };
+
+  // State to manage the selected sort option
+  const [sortOption, setSortOption] = useState("");
+
+  // Function to handle sort change
   const handleSortChange = (event) => {
     setSortOption(event.target.value);
   };
-  const sortedCollection = sortCollection(sortOption);
 
-  const { sendRequest } = useRequest(null, "DELETE");
-  const onDelete = (itemId) => {
-    const collectionId = id;
-    const body = { userId, collectionId };
-    sendRequest(
-      body,
-      token,
-      `https://collectionwebserver.onrender.com/deleteItem/${itemId}`
-    ).then(() => resendRequest());
-  };
+  const sortedItems = collection?.item.slice().sort((itemA, itemB) => {
+    if (sortOption === "old") {
+      return new Date(itemA.createdAt) - new Date(itemB.createdAt);
+    } else if (sortOption === "new") {
+      return new Date(itemB.createdAt) - new Date(itemA.createdAt);
+    } else {
+      return 0;
+    }
+  });
 
   return (
     <CollectionWrapper>
-      <StyledLink to={`/collection/${id}/create-item`}>Create Item</StyledLink>
       <select
         style={{ marginLeft: "10px" }}
         value={sortOption}
@@ -80,18 +59,16 @@ const CollectionPage = () => {
               <Th>Created At</Th>
               <Th>Owner ID</Th>
               <Th>Custom Fields</Th>
-              <Th>Actions</Th>
             </tr>
           </thead>
           <tbody>
-            {sortedCollection?.length ? (
-              sortedCollection.map((item, index) => {
+            {sortedItems?.length ? (
+              sortedItems.map((item, index) => {
                 const createdAt = new Date(item.createdAt);
                 const manufactureDate = new Date(item.date);
                 const formattedCreatedAt = createdAt.toLocaleDateString();
                 const formattedManufactureDate =
                   manufactureDate.toLocaleDateString();
-
                 return (
                   <tr key={index}>
                     <Td>{item.name}</Td>
@@ -107,28 +84,12 @@ const CollectionPage = () => {
                         </div>
                       ))}
                     </Td>
-                    <Td>
-                      <StyledLink
-                        to={`/item-update/${id}/${item._id}`}
-                        style={{
-                          margin: "5px auto",
-                          padding: "5px",
-                          display: "block",
-                          width: "65px",
-                        }}
-                      >
-                        Edit
-                      </StyledLink>
-                      <DeleteBtn onClick={() => onDelete(item._id)}>
-                        Remove
-                      </DeleteBtn>
-                    </Td>
                   </tr>
                 );
               })
             ) : (
               <tr>
-                <Td colSpan="7">No items found in this collection.</Td>
+                <Td colSpan="6">No items found.</Td>
               </tr>
             )}
           </tbody>
@@ -138,4 +99,4 @@ const CollectionPage = () => {
   );
 };
 
-export default CollectionPage;
+export default BcollectionItems;
