@@ -22,7 +22,8 @@ const useRequest = (url, method) => {
       setToken(data.token);
       setUserId(data._id);
     }
-    if (data.message) setMessage(data.message);
+    setMessage("");
+    if (data.error) setMessage(data.error);
     setLoading(false);
     return data;
   };

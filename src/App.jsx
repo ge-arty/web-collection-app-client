@@ -26,8 +26,13 @@ function App() {
       <Routes>
         <Route exact path={"/"} element={<Explore />} />
         <Route path={"/dashboard"} element={<Dashboard />} />
-        <Route path={"/login"} element={<Login />} />
-        <Route path={"/register"} element={<Register />} />
+
+        {!userId && (
+          <>
+            <Route path={"/login"} element={<Login />} />
+            <Route path={"/register"} element={<Register />} />
+          </>
+        )}
 
         {userId && (
           <>
