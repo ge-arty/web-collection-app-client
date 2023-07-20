@@ -43,7 +43,7 @@ const UserInfo = () => {
         <p>
           {languageDictionary[language].email}:{response?.email}
         </p>
-        <p>
+        <p style={{ textAlign: "center" }}>
           {languageDictionary[language].ownerId}:{response?._id}
         </p>
         <p>

@@ -7,6 +7,7 @@ import { AdminPanelWrapper } from "../styles/styles";
 
 const AdminPanel = () => {
   const { setToken, setUserId, setAdmin, userId, token } = useGlobalContext();
+
   const navigate = useNavigate();
   const { response, error, loading, resendRequest } = useFetch(
     `https://collectionwebserver.onrender.com/users/${userId}`,

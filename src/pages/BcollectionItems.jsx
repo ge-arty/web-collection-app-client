@@ -8,8 +8,14 @@ import {
   Td,
   Th,
 } from "../styles/styles";
+import {
+  languageDictionary,
+  useLanguageContext,
+} from "../contexts/LanguageContext";
 
 const BcollectionItems = () => {
+  const { language } = useLanguageContext();
+
   const { id } = useParams();
   const { response, error, loading, resendRequest } = useFetch(
     `https://collectionwebserver.onrender.com/collections`,
@@ -45,20 +51,20 @@ const BcollectionItems = () => {
         value={sortOption}
         onChange={handleSortChange}
       >
-        <option value="">Sort By Date</option>
-        <option value="old">From old to New</option>
-        <option value="new">From new to Old</option>
+        <option value="">{languageDictionary[language].sortByDate}</option>
+        <option value="old">{languageDictionary[language].fromOldtoNew}</option>
+        <option value="new">{languageDictionary[language].fromNewToOld}</option>
       </select>
       <TableWrapper>
         <TableItems>
           <thead>
             <tr>
-              <Th>Name</Th>
-              <Th>Date</Th>
-              <Th>Description</Th>
-              <Th>Created At</Th>
-              <Th>Owner ID</Th>
-              <Th>Custom Fields</Th>
+              <Th>{languageDictionary[language].name}</Th>
+              <Th>{languageDictionary[language].date}</Th>
+              <Th>{languageDictionary[language].description}</Th>
+              <Th>{languageDictionary[language].createdAt} </Th>
+              <Th>{languageDictionary[language].ownerId}</Th>
+              <Th>{languageDictionary[language].customFields}</Th>
             </tr>
           </thead>
           <tbody>

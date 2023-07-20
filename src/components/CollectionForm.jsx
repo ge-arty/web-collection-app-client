@@ -1,6 +1,10 @@
 import { useRef } from "react";
 import readFile from "../utils/readFile";
 import { FormDiv, FormInput, FormWrapper, SubmitBtn } from "../styles/styles";
+import {
+  languageDictionary,
+  useLanguageContext,
+} from "../contexts/LanguageContext";
 
 const CollectionForm = ({ onFormSubmit }) => {
   const nameRef = useRef();
@@ -8,6 +12,8 @@ const CollectionForm = ({ onFormSubmit }) => {
   const categoryRef = useRef();
   const imageRef = useRef();
   const dateRef = useRef();
+
+  const { language } = useLanguageContext();
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -32,7 +38,7 @@ const CollectionForm = ({ onFormSubmit }) => {
     <FormWrapper onSubmit={onSubmit}>
       <FormDiv>
         <label htmlFor="category">
-          Collection Category:
+          {languageDictionary[language].collectionCategory}:
           <select id="category" ref={categoryRef} defaultValue={"Books"}>
             <option value="Books">Books</option>
             <option value="Silverware">Silverware</option>
@@ -43,28 +49,30 @@ const CollectionForm = ({ onFormSubmit }) => {
       </FormDiv>
       <FormDiv>
         <label htmlFor="collectioname">
-          Collection Name
+          {languageDictionary[language].name}:
           <FormInput ref={nameRef} type="text" id="collectioname" />
         </label>
       </FormDiv>
       <FormDiv>
         <label htmlFor="collectioname">
-          Date
+          {languageDictionary[language].date}:
           <FormInput ref={dateRef} type="date" id="collectiodate" />
         </label>
       </FormDiv>
       <FormDiv>
-        <label htmlFor="collectiondescription">Description </label>
+        <label htmlFor="collectiondescription">
+          {languageDictionary[language].description}:
+        </label>
         <textarea ref={descriptionRef} type="text" id="collectiondescription" />
       </FormDiv>
       <FormDiv>
         <label htmlFor="imageInput">
-          Image:
+          {languageDictionary[language].image}:
           <FormInput ref={imageRef} type="file" id="imageInput" />
         </label>
       </FormDiv>
 
-      <SubmitBtn>Submit</SubmitBtn>
+      <SubmitBtn> {languageDictionary[language].add}</SubmitBtn>
     </FormWrapper>
   );
 };

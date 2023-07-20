@@ -4,18 +4,23 @@ import {
   CollectionWrapper,
   DeleteBtn,
   StyledLink,
-  SubmitBtn,
   TableItems,
   TableWrapper,
   Td,
   Th,
 } from "../styles/styles";
+import {
+  languageDictionary,
+  useLanguageContext,
+} from "../contexts/LanguageContext";
 import useFetch from "../hooks/useFetch";
 import { useGlobalContext } from "../contexts/GlobalContext";
 import useRequest from "../hooks/useRequest";
 
 const CollectionPage = () => {
+  const { language } = useLanguageContext();
   const [sortOption, setSortOption] = useState("");
+
   // Collection Id
   const { id } = useParams();
 
@@ -60,27 +65,29 @@ const CollectionPage = () => {
 
   return (
     <CollectionWrapper>
-      <StyledLink to={`/collection/${id}/create-item`}>Create Item</StyledLink>
+      <StyledLink to={`/collection/${id}/create-item`}>
+        {languageDictionary[language].createItem}
+      </StyledLink>
       <select
-        style={{ marginLeft: "10px" }}
+        style={{ marginLeft: "10px", marginTop: "15px" }}
         value={sortOption}
         onChange={handleSortChange}
       >
-        <option value="">Sort By Date</option>
-        <option value="old">From old to New</option>
-        <option value="new">From new to Old</option>
+        <option value="">{languageDictionary[language].sortByDate}</option>
+        <option value="old">{languageDictionary[language].fromOldtoNew}</option>
+        <option value="new">{languageDictionary[language].fromNewToOld}</option>
       </select>
       <TableWrapper>
         <TableItems>
           <thead>
             <tr>
-              <Th>Name</Th>
-              <Th>Date</Th>
-              <Th>Description</Th>
-              <Th>Created At</Th>
-              <Th>Owner ID</Th>
-              <Th>Custom Fields</Th>
-              <Th>Actions</Th>
+              <Th>{languageDictionary[language].name}</Th>
+              <Th>{languageDictionary[language].date}</Th>
+              <Th>{languageDictionary[language].description}</Th>
+              <Th>{languageDictionary[language].createdAt}</Th>
+              <Th>{languageDictionary[language].ownerId}</Th>
+              <Th>{languageDictionary[language].customFields}</Th>
+              <Th>{languageDictionary[language].actions}</Th>
             </tr>
           </thead>
           <tbody>
@@ -117,10 +124,10 @@ const CollectionPage = () => {
                           width: "65px",
                         }}
                       >
-                        Edit
+                        {languageDictionary[language].edit}
                       </StyledLink>
                       <DeleteBtn onClick={() => onDelete(item._id)}>
-                        Remove
+                        {languageDictionary[language].remove}
                       </DeleteBtn>
                     </Td>
                   </tr>
@@ -128,7 +135,7 @@ const CollectionPage = () => {
               })
             ) : (
               <tr>
-                <Td colSpan="7">No items found in this collection.</Td>
+                <Td colSpan="7">{languageDictionary[language].noItemsFound}</Td>
               </tr>
             )}
           </tbody>

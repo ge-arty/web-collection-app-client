@@ -49,6 +49,7 @@ export const NavItem = styled(NavLink)`
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
   &:hover {
     background-color: #3f4345;
   }
@@ -128,11 +129,10 @@ export const FormDiv = styled.div`
 export const FieldsWrapper = styled.div`
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
   align-items: center;
   padding: 1rem;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
 `;
 
 export const FormInput = styled.input`

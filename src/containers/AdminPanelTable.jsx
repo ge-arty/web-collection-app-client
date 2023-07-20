@@ -6,6 +6,10 @@ import {
   Td,
   Th,
 } from "../styles/styles";
+import {
+  useLanguageContext,
+  languageDictionary,
+} from "../contexts/LanguageContext";
 
 const AdminPanelTable = ({
   response,
@@ -13,6 +17,8 @@ const AdminPanelTable = ({
   reqAdminControl,
   reqBlockControl,
 }) => {
+  const { language } = useLanguageContext();
+
   const deleteUser = (id) => {
     reqDeleteUser(id);
   };
@@ -28,16 +34,16 @@ const AdminPanelTable = ({
       <TableItems>
         <thead>
           <tr>
-            <Th>Username</Th>
-            <Th>Email</Th>
-            <Th>Admin Status</Th>
-            <Th>Block Status</Th>
-            <Th>ID</Th>
-            <Th>Make Admin</Th>
-            <Th>UnBlock</Th>
-            <Th>Remove Account</Th>
-            <Th>Remove From Admins</Th>
-            <Th>Block</Th>
+            <Th>{languageDictionary[language].username}</Th>
+            <Th>{languageDictionary[language].email}</Th>
+            <Th>{languageDictionary[language].adminStatus}</Th>
+            <Th>{languageDictionary[language].blockStatus}</Th>
+            <Th>{languageDictionary[language].id}</Th>
+            <Th>{languageDictionary[language].giveAdmin}</Th>
+            <Th>{languageDictionary[language].unBlock}</Th>
+            <Th>{languageDictionary[language].removeAccount}</Th>
+            <Th>{languageDictionary[language].removeAdmin}</Th>
+            <Th>{languageDictionary[language].block}</Th>
           </tr>
         </thead>
         <tbody>

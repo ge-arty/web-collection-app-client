@@ -8,8 +8,14 @@ import {
   FormWrapper,
   SubmitBtn,
 } from "../styles/styles";
+import {
+  languageDictionary,
+  useLanguageContext,
+} from "../contexts/LanguageContext";
 
 const ItemForm = ({ onFormSubmit, item }) => {
+  const { language } = useLanguageContext();
+
   const nameRef = useRef();
   const dateRef = useRef();
   const descriptionRef = useRef();
@@ -44,7 +50,7 @@ const ItemForm = ({ onFormSubmit, item }) => {
     <FormWrapper onSubmit={onSubmit}>
       <FormDiv>
         <label htmlFor="item-name">
-          Name:
+          {languageDictionary[language].name}:
           <FormInput
             defaultValue={item?.name}
             ref={nameRef}
@@ -55,12 +61,14 @@ const ItemForm = ({ onFormSubmit, item }) => {
       </FormDiv>
       <FormDiv>
         <label htmlFor="date">
-          Date
+          {languageDictionary[language].date}:
           <FormInput ref={dateRef} type="date" id="date" />
         </label>
       </FormDiv>
       <FormDiv>
-        <label htmlFor="item-description">Description </label>
+        <label htmlFor="item-description">
+          {languageDictionary[language].description}:
+        </label>
         <textarea
           defaultValue={item?.description}
           ref={descriptionRef}
@@ -70,43 +78,39 @@ const ItemForm = ({ onFormSubmit, item }) => {
       </FormDiv>
       {fields.map((field, index) => (
         <FieldsWrapper key={index}>
-          <label htmlFor={`fieldKey${index}`}>
-            Name
-            <FormInput
-              type="text"
-              id={`fieldKey${index}`}
-              value={field.key}
-              onChange={(e) =>
-                handleFieldChange(index, e.target.value, field.value)
-              }
-            />
-          </label>
-
-          <label htmlFor={`fieldValue${index}`}>
-            Value
-            <FormInput
-              type="text"
-              id={`fieldValue${index}`}
-              value={field.value}
-              onChange={(e) =>
-                handleFieldChange(index, field.key, e.target.value)
-              }
-            />
-          </label>
-
+          <label htmlFor={`fieldKey${index}`}> </label>
+          {languageDictionary[language].newFieldName}:
+          <FormInput
+            type="text"
+            id={`fieldKey${index}`}
+            value={field.key}
+            onChange={(e) =>
+              handleFieldChange(index, e.target.value, field.value)
+            }
+          />
+          <label htmlFor={`fieldValue${index}`}> </label>
+          {languageDictionary[language].newFieldValue}:
+          <FormInput
+            type="text"
+            id={`fieldValue${index}`}
+            value={field.value}
+            onChange={(e) =>
+              handleFieldChange(index, field.key, e.target.value)
+            }
+          />
           {fields.length > 1 && (
             <DeleteBtn type="button" onClick={() => removeField(index)}>
-              Remove Field
+              {languageDictionary[language].removeField}
             </DeleteBtn>
           )}
         </FieldsWrapper>
       ))}
 
       <FieldAddBtn type="button" onClick={addField}>
-        Add Field
+        {languageDictionary[language].addNewField}
       </FieldAddBtn>
 
-      <SubmitBtn>Submit</SubmitBtn>
+      <SubmitBtn> {languageDictionary[language].createItem}</SubmitBtn>
     </FormWrapper>
   );
 };
