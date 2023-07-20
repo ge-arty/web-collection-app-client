@@ -5,10 +5,7 @@ const themeConfig = {
     color: "white",
     background: "black",
   },
-  light: {
-    color: "black",
-    background: "#F1EFF2",
-  },
+  light: {},
 };
 
 const useTheme = () => {

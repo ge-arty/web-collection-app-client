@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
 import useCookieStorage from "../hooks/useCookiesStorage";
+import useTheme from "../hooks/useTheme";
 
 const GlobalContext = React.createContext({
   admin: "false",
@@ -13,6 +14,7 @@ const useGlobalContext = () => {
 };
 
 const GlobalContextProvider = ({ children }) => {
+  const { theme, toggle } = useTheme();
   const [admin, setAdmin] = useLocalStorage("admin", "false");
   const [userId, setUserId] = useLocalStorage("userId", "");
   const [token, setToken] = useCookieStorage("token", null);
@@ -26,6 +28,8 @@ const GlobalContextProvider = ({ children }) => {
         setUserId,
         token,
         setToken,
+        theme,
+        toggle,
       }}
     >
       {children}

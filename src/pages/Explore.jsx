@@ -23,8 +23,11 @@ import {
 } from "../styles/styles";
 import mainPicture from "../assets/overlay-bg.jpg";
 import useFetch from "../hooks/useFetch";
+import { useGlobalContext } from "../contexts/GlobalContext";
 
 const Explore = () => {
+  const { theme } = useGlobalContext();
+  console.log(theme);
   const { response, error, loading } = useFetch(
     `https://collectionwebserver.onrender.com/exploreInfo`,
     "GET",

@@ -203,6 +203,7 @@ export const TableItems = styled.table`
 export const Th = styled.th`
   background-color: #f2f2f2;
   padding: 12px;
+  color: black;
 `;
 
 export const Td = styled.td`
@@ -315,4 +316,26 @@ export const ExplorePictureTitleBox = styled.div`
   color: rgba(113, 32, 153, 0.7);
   font-size: clamp(1rem, 0.6479rem + 1.1268vw, 2rem);
   font-weight: bold;
+`;
+// ------------------- Admin Panel
+export const AdminPanelWrapper = styled.div`
+  width: 100%;
+  padding: 1rem;
+`;
+// ------------------------ Dark/Light btn
+export const ThemeCircleContainer = styled.div`
+  width: 40px;
+  border-radius: 20px;
+  height: 20px;
+  background: #fff;
+  padding: 0.1rem;
+  display: flex;
+  justify-content: ${(props) => (props.alignRight ? "flex-end" : "flex-start")};
+  align-items: center;
+`;
+export const ThemeCircle = styled.div`
+  border-radius: 50%;
+  background-color: rgba(113, 32, 153, 1);
+  height: 18px;
+  width: 18px;
 `;

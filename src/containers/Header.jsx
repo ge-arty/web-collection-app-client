@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useGlobalContext } from "../contexts/GlobalContext";
 import {
   HeaderWrapper,
@@ -5,10 +6,24 @@ import {
   MenuButton,
   NavItem,
   NavWrapper,
+  ThemeCircle,
+  ThemeCircleContainer,
 } from "../styles/styles";
 
 const Header = () => {
-  const { userId, admin, setAdmin, setUserId, setToken } = useGlobalContext();
+  const { userId, admin, setAdmin, setUserId, setToken, toggle } =
+    useGlobalContext();
+  const [alignRight, setAlignRight] = useState(false);
+
+  const toggleAlignment = () => {
+    setAlignRight((prevState) => !prevState);
+  };
+
+  const handleOnClick = () => {
+    toggle();
+    toggleAlignment();
+  };
+
   const signOut = () => {
     setAdmin(false);
     setUserId("");
@@ -18,9 +33,11 @@ const Header = () => {
   return (
     <HeaderWrapper>
       <Logo>MyCollections</Logo>
+
       <MenuButton>
         <span>Menu</span>
       </MenuButton>
+
       <NavWrapper>
         <NavItem to={"/"}>Explore</NavItem>
         <NavItem to={"/dashboard"}>Dashboard</NavItem>
@@ -28,6 +45,12 @@ const Header = () => {
         {admin !== false && admin !== "false" && (
           <NavItem to={"/admin-panel"}>Admin Panel</NavItem>
         )}
+
+        <NavItem onClick={handleOnClick}>
+          <ThemeCircleContainer alignRight={alignRight}>
+            <ThemeCircle></ThemeCircle>
+          </ThemeCircleContainer>
+        </NavItem>
       </NavWrapper>
 
       {userId === "" ? (

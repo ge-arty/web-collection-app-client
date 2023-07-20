@@ -35,7 +35,7 @@ const UserInfo = () => {
         <p>Username: {response?.username}</p>
         <p>User Email:{response?.email}</p>
         <p>User id:{response?._id}</p>
-        <p>Admin Status:{response?.admin === "true" ? "Admin" : "User"}</p>
+        <p>Admin Status:{response?.admin === true ? "Admin" : "User"}</p>
         <StyledLink style={{ color: "#FFF" }} to={"/create-collection"}>
           Create Collection
         </StyledLink>
