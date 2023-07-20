@@ -6,11 +6,16 @@ import {
   FormWrapper,
   SubmitBtn,
 } from "../styles/styles";
+import {
+  languageDictionary,
+  useLanguageContext,
+} from "../contexts/LanguageContext";
 
 const RegisterForm = ({ onFormSubmit, message }) => {
   const usernameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
+  const { language } = useLanguageContext();
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -24,25 +29,25 @@ const RegisterForm = ({ onFormSubmit, message }) => {
     <FormWrapper onSubmit={onSubmit}>
       <FormDiv>
         <label htmlFor="username">
-          Username:
+          {languageDictionary[language].login}:
           <FormInput ref={usernameRef} type="text" id="username" />
         </label>
       </FormDiv>
       <FormDiv>
         <label htmlFor="useremail">
-          Email:
+          {languageDictionary[language].email}:
           <FormInput ref={emailRef} type="email" id="email" />
         </label>
       </FormDiv>
       <FormDiv>
         <label htmlFor="userpassword">
-          Password:
+          {languageDictionary[language].password}:
           <FormInput ref={passwordRef} type="password" id="userpassword" />
         </label>
       </FormDiv>
 
       <FormText>{message}</FormText>
-      <SubmitBtn>Submit</SubmitBtn>
+      <SubmitBtn> {languageDictionary[language].register}</SubmitBtn>
     </FormWrapper>
   );
 };

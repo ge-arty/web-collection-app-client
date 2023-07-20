@@ -14,9 +14,14 @@ import {
   CollectionContainer,
   StyledLink,
 } from "../styles/styles";
+import {
+  languageDictionary,
+  useLanguageContext,
+} from "../contexts/LanguageContext";
 
 const CollectionCards = ({ response, onDelete }) => {
   const [selectValueFilter, setSelectValueFilter] = useState("");
+  const { language } = useLanguageContext();
   const collections = response?.collections.filter((collection) => {
     if (selectValueFilter === "") return true;
     else return collection.category === selectValueFilter;
@@ -28,12 +33,16 @@ const CollectionCards = ({ response, onDelete }) => {
         value={selectValueFilter}
         onChange={(e) => setSelectValueFilter(e.target.value)}
       >
-        <option value="">Filter Your Collections</option>
-        <option value="Books">Books</option>
-        <option value="Stamps">Stamps</option>
-        <option value="Silverware">Silverware</option>
-        <option value="Coins">Coins</option>
-        <option value="Others">Others</option>
+        <option value="">
+          {languageDictionary[language].filterCollections}
+        </option>
+        <option value="Books">{languageDictionary[language].books}</option>
+        <option value="Stamps">{languageDictionary[language].stamps}</option>
+        <option value="Silverware">
+          {languageDictionary[language].silverware}
+        </option>
+        <option value="Coins">{languageDictionary[language].coins}</option>
+        <option value="Others">{languageDictionary[language].others}</option>
       </select>
       <CollectionContainer>
         {collections?.length ? (
@@ -58,10 +67,10 @@ const CollectionCards = ({ response, onDelete }) => {
                   </CollectionCardCreatedAt>
                   <CollectionCardButtons>
                     <CollectionCardButton onClick={() => onDelete(item._id)}>
-                      Remove
+                      {languageDictionary[language].remove}
                     </CollectionCardButton>
                     <StyledLink to={`/collection/${item._id}`}>
-                      See Items
+                      {languageDictionary[language].seeItems}
                     </StyledLink>
                   </CollectionCardButtons>
                 </CollectionCardBody>
@@ -69,7 +78,7 @@ const CollectionCards = ({ response, onDelete }) => {
             );
           })
         ) : (
-          <div>There are no collections yet.</div>
+          <div>{languageDictionary[language].noCollections}</div>
         )}
       </CollectionContainer>
     </CollectionCardWrapper>

@@ -14,7 +14,6 @@ import ItemUpdatePage from "./pages/ItemUpdatePage";
 import BcollectionItems from "./pages/BcollectionItems";
 import WildCard from "./pages/WildCard";
 import AdminPanel from "./pages/AdminPanel";
-import useTheme from "./hooks/useTheme";
 
 function App() {
   const { userId, admin, theme } = useGlobalContext();

@@ -8,9 +8,14 @@ import { useGlobalContext } from "../contexts/GlobalContext";
 import { Link } from "react-router-dom";
 import CollectionCards from "./CollectionCards";
 import useRequest from "../hooks/useRequest";
+import {
+  languageDictionary,
+  useLanguageContext,
+} from "../contexts/LanguageContext";
 
 const UserInfo = () => {
   const { userId, token } = useGlobalContext();
+  const { language } = useLanguageContext();
   const { response, error, loading, resendRequest } = useFetch(
     `https://collectionwebserver.onrender.com/user/${userId}`,
     "GET",
@@ -32,12 +37,21 @@ const UserInfo = () => {
   return (
     <UserInfoWrapper>
       <UserAccountDetails>
-        <p>Username: {response?.username}</p>
-        <p>User Email:{response?.email}</p>
-        <p>User id:{response?._id}</p>
-        <p>Admin Status:{response?.admin === true ? "Admin" : "User"}</p>
+        <p>
+          {languageDictionary[language].username}:{response?.username}
+        </p>
+        <p>
+          {languageDictionary[language].email}:{response?.email}
+        </p>
+        <p>
+          {languageDictionary[language].ownerId}:{response?._id}
+        </p>
+        <p>
+          {languageDictionary[language].adminStatus}:
+          {response?.admin === true ? "Admin" : "User"}
+        </p>
         <StyledLink style={{ color: "#FFF" }} to={"/create-collection"}>
-          Create Collection
+          {languageDictionary[language].createCollection}
         </StyledLink>
       </UserAccountDetails>
       <CollectionCards response={response} onDelete={onDelete} />

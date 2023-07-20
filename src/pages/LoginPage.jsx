@@ -19,7 +19,7 @@ const LoginPage = () => {
   if (loading) return <p>Loading... </p>;
   return (
     <FormsWrapper>
-      <LoginForm onFormSubmit={onFormSubmit} message={message} />;
+      <LoginForm onFormSubmit={onFormSubmit} message={message} />
     </FormsWrapper>
   );
 };

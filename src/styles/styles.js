@@ -37,6 +37,7 @@ export const MenuButton = styled.button`
 `;
 export const NavWrapper = styled.nav`
   display: flex;
+  align-items: center;
   justify-content: center;
 `;
 export const NavItem = styled(NavLink)`
@@ -45,7 +46,9 @@ export const NavItem = styled(NavLink)`
   font-size: 16px;
   height: 100%;
   padding: 1rem;
-
+  display: flex;
+  align-items: center;
+  justify-content: center;
   &:hover {
     background-color: #3f4345;
   }
@@ -286,7 +289,9 @@ export const ExploreContainer = styled.div`
   padding: 1rem;
 `;
 
-export const ExploreTitle = styled.h2``;
+export const ExploreTitle = styled.h2`
+  margin-bottom: 30px;
+`;
 export const ExploreFlexContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -330,7 +335,8 @@ export const ThemeCircleContainer = styled.div`
   background: #fff;
   padding: 0.1rem;
   display: flex;
-  justify-content: ${(props) => (props.alignRight ? "flex-end" : "flex-start")};
+  justify-content: ${(props) =>
+    props.$alignRight ? "flex-end" : "flex-start"};
   align-items: center;
 `;
 export const ThemeCircle = styled.div`
@@ -338,4 +344,37 @@ export const ThemeCircle = styled.div`
   background-color: rgba(113, 32, 153, 1);
   height: 18px;
   width: 18px;
+`;
+// ---------- Burger Menu
+export const BurgerBtn = styled.div`
+  padding: 1rem;
+  color: #fff;
+  cursor: pointer;
+  width: 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 4px;
+`;
+export const BurgerMenu = styled.div`
+  position: absolute;
+  top: 40px;
+  right: -10px;
+  background-color: #2c2f30;
+  opacity: 1;
+  z-index: 1;
+
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+`;
+export const BurgerContainer = styled.div`
+  position: relative;
+`;
+export const BurgerLines = styled.div`
+  width: 20px;
+  height: 2px;
+  background-color: #fff;
+  border-radius: 5px;
 `;

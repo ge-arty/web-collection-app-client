@@ -24,10 +24,14 @@ import {
 import mainPicture from "../assets/overlay-bg.jpg";
 import useFetch from "../hooks/useFetch";
 import { useGlobalContext } from "../contexts/GlobalContext";
+import {
+  languageDictionary,
+  useLanguageContext,
+} from "../contexts/LanguageContext";
 
 const Explore = () => {
   const { theme } = useGlobalContext();
-  console.log(theme);
+  const { language } = useLanguageContext();
   const { response, error, loading } = useFetch(
     `https://collectionwebserver.onrender.com/exploreInfo`,
     "GET",
@@ -39,13 +43,14 @@ const Explore = () => {
       <ExplorePictureContainer>
         <ExploreImg src={mainPicture} alt="main-pic" />
         <ExplorePictureTitleBox>
-          Register, create your first collection and join our friendly
-          community!
+          {languageDictionary[language].exploreMainTitle}
         </ExplorePictureTitleBox>
       </ExplorePictureContainer>
 
       <ExploreContainer>
-        <ExploreTitle>Biggest Collections</ExploreTitle>
+        <ExploreTitle>
+          {languageDictionary[language].biggestCollections}
+        </ExploreTitle>
         <ExploreFlexContainer>
           {response?.biggestCollections.map((collection) => (
             <CollectionCardElem key={collection._id}>
@@ -67,7 +72,7 @@ const Explore = () => {
                 </CollectionCardCreatedAt>
                 <CollectionCardButtons>
                   <StyledLink to={`/biggest-collection/${collection._id}`}>
-                    See Items
+                    {languageDictionary[language].seeItems}
                   </StyledLink>
                 </CollectionCardButtons>
               </CollectionCardBody>
@@ -77,18 +82,18 @@ const Explore = () => {
       </ExploreContainer>
 
       <ExploreContainer>
-        <ExploreTitle>Latest Created Items</ExploreTitle>
+        <ExploreTitle>{languageDictionary[language].newItems}</ExploreTitle>
 
         <TableWrapper>
           <TableItems>
             <thead>
               <tr>
-                <Th>Name</Th>
-                <Th>Date</Th>
-                <Th>Description</Th>
-                <Th>Created At</Th>
-                <Th>Owner ID</Th>
-                <Th>Custom Fields</Th>
+                <Th>{languageDictionary[language].name}</Th>
+                <Th>{languageDictionary[language].date}</Th>
+                <Th>{languageDictionary[language].description}</Th>
+                <Th>{languageDictionary[language].createdAt}</Th>
+                <Th>{languageDictionary[language].ownerId}</Th>
+                <Th>{languageDictionary[language].customFields} </Th>
               </tr>
             </thead>
             <tbody>
